@@ -1,15 +1,76 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.TreeSet;
+class Library{
+    String title;
+    String status;
+
+    Library(String title,String status){
+        this.title=title;
+        this.status=status;
+    }
+
+    @Override
+    public String toString() {
+        return "Title: " + title + ", Status: " + status;
+    }
+
+}
+
+class LibraryManagement{
+    private TreeSet<String> books;
+
+    LibraryManagement(){
+        books = new TreeSet<>();
+    }
+
+    public String addBooks(String title){
+        books.add(title);
+        return "Books Added";
+    }
+    public String removeBooks(String title){
+        if(books.contains(title)) {
+            books.remove(title);
+        }else {
+            System.out.println("Books no Available");
+            return" ";
+        }
+        return "Books removed";
+    }
+    public String check(String title){
+        if(books.contains(title)) {
+            System.out.println("Book Available");
+        }else {
+            System.out.println("Books not Available");
+            return" ";
+        }
+        return "Books removed";
+    }
+    public void findBook(char c) {
+        for (String book : books) {
+            if (book.startsWith(String.valueOf(c)))
+                System.out.println(book);
+        }
+    }
+
+    public void display(){
+        for(String book : books){
+            System.out.println(book);
+        }
+    }
+}
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        LibraryManagement manager = new LibraryManagement();
+        manager.addBooks("Computer Science");
+        manager.addBooks("Y");
+        manager.addBooks("G");
+        manager.addBooks("H");
+        manager.addBooks("B");
+        manager.findBook('C');
+        manager.display();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        manager.removeBooks("G");
+        manager.display();
+
+        manager.check("P");
     }
 }
